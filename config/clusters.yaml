@@ -1,0 +1,30 @@
+
+clusters:
+  # ================= 本地主集群 (位于你的 Windows 电脑 172.200.0.125) =================
+  - name: "WSL-Kind"
+    # 🌟 修改点：使用 Windows 的局域网物理 IP。
+    # 假设你之前在 Kind 中通过 NodePort 暴露了 Prometheus，端口为 30090
+    prometheus_url: "http://172.200.0.125:30090/api/v1/query"
+    region: "cn-east"
+
+  # ================= 局域网边缘集群 (另一台远程设备) =================
+  - name: "Jetson-K3s"
+    # 这个保持不变，因为它已经是物理 IP 访问了
+    prometheus_url: "http://172.200.4.253:30090/api/v1/query"
+    region: "cn-south"
+
+# clusters:
+#   # ================= 本地主集群 (Python 服务部署在此) =================
+#   - name: "WSL-Kind"
+#     # ⚠️ 注意这里：
+#     # 1. 走 K8s 内部 DNS，格式为：http://<服务名>.<命名空间>.svc.cluster.local:<服务端口>
+#     # 2. 端口不再是外部暴露的 30090，而是服务(Service)自身的内部端口（通常 Prometheus 是 9090 或 80）
+#     # 3. 假设你的 prometheus 部署在 default 命名空间，服务名就叫 prometheus
+#     prometheus_url: "http://prometheus.monitoring.svc.cluster.local:9090/api/v1/query"
+#     region: "cn-east"
+    
+#   # ================= 局域网边缘集群 =================
+#   - name: "Jetson-K3s"
+#     # 走物理局域网 IP，因为 K3s 暴露了 NodePort 30090，WSL 可以直接通过宿主机网络访问过去
+#     prometheus_url: "http://172.200.4.253:30090/api/v1/query"
+#     region: "cn-south"

@@ -1,0 +1,17 @@
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+pydantic==2.5.2
+python-dotenv==1.0.0
+
+# 监控
+prometheus-api-client==0.5.1
+
+# 异步HTTP客户端
+httpx==0.25.2
+
+# 日志
+structlog==23.2.0
+
+# 异步支持
+asyncio==3.4.3
